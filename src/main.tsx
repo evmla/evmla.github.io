@@ -11,7 +11,7 @@ import App from "./App";
 const config: Config = {
   readOnlyChainId: EvmosTestChain.chainId,
   readOnlyUrls: {
-    [EvmosTestChain.chainId]: "https://eth.bd.evmos.dev:8545",
+    [EvmosTestChain.chainId]: EvmosTestChain.rpcUrl || "",
   },
   networks: [...DEFAULT_SUPPORTED_CHAINS, EvmosTestChain],
   noMetamaskDeactivate: true,

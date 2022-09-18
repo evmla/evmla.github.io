@@ -1,3 +1,3 @@
-import EVM from "./EVM.json";
+import SBT from "./SBT.json";
 
-export { EVM };
+export { SBT };

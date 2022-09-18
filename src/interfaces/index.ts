@@ -1,6 +1,6 @@
-export interface Slug {
+export interface Soul {
   owner: string;
-  slug: string;
+  soul: string;
   name: string;
   description: string;
   image: string;

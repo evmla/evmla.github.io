@@ -1,8 +1,88 @@
 [
   {
-    "inputs": [],
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "name_",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "symbol_",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "price_",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "nonpayable",
     "type": "constructor"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "soul",
+        "type": "string"
+      }
+    ],
+    "name": "FailedMint",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "soul",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "need",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "current",
+        "type": "uint256"
+      }
+    ],
+    "name": "InsufficientBalance",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "soul",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      }
+    ],
+    "name": "SoulExists",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      }
+    ],
+    "name": "SoulNotExists",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SoulNotFound",
+    "type": "error"
   },
   {
     "anonymous": false,
@@ -16,7 +96,7 @@
       {
         "indexed": true,
         "internalType": "string",
-        "name": "slug",
+        "name": "soul",
         "type": "string"
       },
       {
@@ -44,7 +124,7 @@
         "type": "string"
       }
     ],
-    "name": "Create",
+    "name": "Mint",
     "type": "event"
   },
   {
@@ -59,7 +139,7 @@
       {
         "indexed": true,
         "internalType": "string",
-        "name": "slug",
+        "name": "soul",
         "type": "string"
       },
       {
@@ -93,255 +173,12 @@
   {
     "inputs": [
       {
-        "internalType": "string",
-        "name": "_slug",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "_name",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "_description",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "_image",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "_link",
-        "type": "string"
-      }
-    ],
-    "name": "create",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_owner",
-        "type": "address"
-      }
-    ],
-    "name": "getMetadataByAddress",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "owner",
-            "type": "address"
-          },
-          {
-            "internalType": "string",
-            "name": "slug",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "name",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "description",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "image",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "link",
-            "type": "string"
-          }
-        ],
-        "internalType": "struct IEVM.Metadata",
-        "name": "m",
-        "type": "tuple"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_id",
-        "type": "uint256"
-      }
-    ],
-    "name": "getMetadataById",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "owner",
-            "type": "address"
-          },
-          {
-            "internalType": "string",
-            "name": "slug",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "name",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "description",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "image",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "link",
-            "type": "string"
-          }
-        ],
-        "internalType": "struct IEVM.Metadata",
-        "name": "m",
-        "type": "tuple"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_id",
-        "type": "uint256"
-      }
-    ],
-    "name": "getMetadataByIdDesc",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "owner",
-            "type": "address"
-          },
-          {
-            "internalType": "string",
-            "name": "slug",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "name",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "description",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "image",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "link",
-            "type": "string"
-          }
-        ],
-        "internalType": "struct IEVM.Metadata",
-        "name": "m",
-        "type": "tuple"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "_slug",
-        "type": "string"
-      }
-    ],
-    "name": "getMetadataBySlug",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "owner",
-            "type": "address"
-          },
-          {
-            "internalType": "string",
-            "name": "slug",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "name",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "description",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "image",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "link",
-            "type": "string"
-          }
-        ],
-        "internalType": "struct IEVM.Metadata",
-        "name": "m",
-        "type": "tuple"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "address",
         "name": "",
         "type": "address"
       }
     ],
-    "name": "owner",
+    "name": "_owner",
     "outputs": [
       {
         "internalType": "uint256",
@@ -360,7 +197,7 @@
         "type": "string"
       }
     ],
-    "name": "slug",
+    "name": "_soul",
     "outputs": [
       {
         "internalType": "uint256",
@@ -379,7 +216,7 @@
         "type": "uint256"
       }
     ],
-    "name": "slugs",
+    "name": "_souls",
     "outputs": [
       {
         "internalType": "address",
@@ -388,7 +225,7 @@
       },
       {
         "internalType": "string",
-        "name": "slug",
+        "name": "soul",
         "type": "string"
       },
       {
@@ -418,23 +255,311 @@
   {
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "id_",
+        "type": "uint256"
+      }
+    ],
+    "name": "getMetadataById",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "soul",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "image",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "link",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct ISBT.Metadata",
+        "name": "m",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "id_",
+        "type": "uint256"
+      }
+    ],
+    "name": "getMetadataByIdDesc",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "soul",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "image",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "link",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct ISBT.Metadata",
+        "name": "m",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "owner_",
+        "type": "address"
+      }
+    ],
+    "name": "getMetadataByOwner",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "soul",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "image",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "link",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct ISBT.Metadata",
+        "name": "m",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "string",
-        "name": "_name",
+        "name": "soul_",
+        "type": "string"
+      }
+    ],
+    "name": "getMetadataBySoul",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "soul",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "image",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "link",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct ISBT.Metadata",
+        "name": "m",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "soul_",
         "type": "string"
       },
       {
         "internalType": "string",
-        "name": "_description",
+        "name": "name_",
         "type": "string"
       },
       {
         "internalType": "string",
-        "name": "_image",
+        "name": "description_",
         "type": "string"
       },
       {
         "internalType": "string",
-        "name": "_link",
+        "name": "image_",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "link_",
+        "type": "string"
+      }
+    ],
+    "name": "mint",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "name",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "soul_",
+        "type": "string"
+      }
+    ],
+    "name": "price",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "symbol",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "name_",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "description_",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "image_",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "link_",
         "type": "string"
       }
     ],

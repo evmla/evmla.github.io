@@ -1,8 +1,6 @@
 import { useState } from "react";
 import {
-  AppShell,
   useMantineTheme,
-  Grid,
   Paper,
   Group,
   Button,
@@ -11,10 +9,6 @@ import {
   createStyles,
 } from "@mantine/core";
 import { useParams } from "react-router-dom";
-
-import Dots from "../components/Dots";
-import Bottom from "../components/Bottom";
-import Top from "../components/Top";
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -104,31 +98,47 @@ export default function Index() {
         <Accordion
           mx="auto"
           variant="filled"
-          defaultValue="customization"
+          defaultValue="Soulbound"
           classNames={classes}
           className={classes.root}
         >
-          <Accordion.Item value="customization">
-            <Accordion.Control>Customization</Accordion.Control>
+          <Accordion.Item value="Soulbound">
+            <Accordion.Control>What is Soulbound 👻 Token?</Accordion.Control>
             <Accordion.Panel>
-              Colors, fonts, shadows and many other parts are customizable to
-              fit your design needs
+              Proposed by Ethereum creator{" "}
+              <Button
+                component="a"
+                target="_blank"
+                compact
+                variant="subtle"
+                color="indigo"
+                href="https://vitalik.eth.limo/general/2022/01/26/soulbound.html"
+              >
+                Vitalik Buterin
+              </Button>
+              , Soulbound 👻 tokens are non-transferable, non-funded tokens for
+              a decentralized society.
             </Accordion.Panel>
           </Accordion.Item>
 
-          <Accordion.Item value="flexibility">
-            <Accordion.Control>Flexibility</Accordion.Control>
+          <Accordion.Item value="Mint">
+            <Accordion.Control>
+              How to mint a second Soulbound 👻 token?
+            </Accordion.Control>
             <Accordion.Panel>
-              Configure components appearance and behavior with vast amount of
-              settings or overwrite any part of component styles
+              One address can only have one Soulbound token. If you want to
+              issue a second Soulbound token, you need to change the address.
             </Accordion.Panel>
           </Accordion.Item>
 
-          <Accordion.Item value="focus-ring">
-            <Accordion.Control>No annoying focus ring</Accordion.Control>
+          <Accordion.Item value="Total">
+            <Accordion.Control>
+              How many Soulbound 👻 tokens will be minted in total?
+            </Accordion.Control>
             <Accordion.Panel>
-              With new :focus-visible pseudo-class focus ring appears only when
-              user navigates with keyboard
+              About 1411 Soulbound 👻 tokens consisting of one emoji will be
+              minted. New emoji appear every year, so the total number will be
+              increased.
             </Accordion.Panel>
           </Accordion.Item>
         </Accordion>

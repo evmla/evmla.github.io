@@ -7,7 +7,6 @@ import {
   Image,
   useMantineTheme,
   Group,
-  UnstyledButton,
   ActionIcon,
   useMantineColorScheme,
 } from "@mantine/core";
@@ -21,7 +20,7 @@ import Connect from "./Connect";
 
 import logoDark from "../assets/soul-dark.svg";
 import logoWhite from "../assets/soul-white.svg";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const Top = () => {
@@ -36,11 +35,11 @@ const Top = () => {
       location &&
       location.pathname !== "/" &&
       location.pathname !== "/faq" &&
-      location.pathname !== "/register"
+      location.pathname !== "/mint"
     ) {
       setValue("send");
-    } else if (location.pathname === "/" || location.pathname === "/register") {
-      setValue("register");
+    } else if (location.pathname === "/" || location.pathname === "/mint") {
+      setValue("mint");
     } else {
       setValue(null);
     }
@@ -58,7 +57,7 @@ const Top = () => {
       >
         <div>
           <Group>
-            <Text>
+            <Text component={Link} to="/">
               <Image
                 width={35}
                 height={35}
@@ -98,11 +97,11 @@ const Top = () => {
             value={value}
             data={[
               {
-                value: "register",
+                value: "mint",
                 label: (
                   <Center>
                     <IconUserPlus size={16} />
-                    <Box ml={10}>Register SBT</Box>
+                    <Box ml={10}>Mint SBT</Box>
                   </Center>
                 ),
               },

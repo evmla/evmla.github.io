@@ -1,11 +1,11 @@
 import { Contract, utils } from "ethers";
 import { EVM_CONTRACT } from "../constants";
-import { EVM } from "../abi";
+import { SBT } from "../abi";
 import { Call } from "@usedapp/core";
 
-const contract = new Contract(EVM_CONTRACT, new utils.Interface(EVM));
+const contract = new Contract(EVM_CONTRACT, new utils.Interface(SBT));
 
-const slugs = (first: number = 1, skip: number = 0): Call[] => {
+const souls = (first: number = 1, skip: number = 0): Call[] => {
   const calls = [];
 
   let i = skip <= 0 ? 1 : skip;
@@ -20,25 +20,25 @@ const slugs = (first: number = 1, skip: number = 0): Call[] => {
   return calls;
 };
 
-const getMetadataBySlug = (slug: string): Call[] => {
+const getMetadataBySoul = (soul: string): Call[] => {
   const calls = [];
 
   calls.push({
     contract,
-    method: "getMetadataBySlug",
-    args: [slug],
+    method: "getMetadataBySoul",
+    args: [soul],
   });
 
   return calls;
 };
 
-const getMetadataByAddress = (address: string): Call[] => {
+const getMetadataByOwner = (owner: string): Call[] => {
   const calls = [];
 
   calls.push({
     contract,
-    method: "getMetadataByAddress",
-    args: [address],
+    method: "getMetadataByOwner",
+    args: [owner],
   });
 
   return calls;
@@ -56,4 +56,4 @@ const getMetadataById = (id: string): Call[] => {
   return calls;
 };
 
-export { getMetadataBySlug, getMetadataById, getMetadataByAddress, slugs };
+export { getMetadataBySoul, getMetadataById, getMetadataByOwner, souls };

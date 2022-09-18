@@ -1,9 +1,8 @@
-import { Footer, Button, useMantineColorScheme } from "@mantine/core";
-import { IconQuestionMark, IconAt, IconBrandGithub } from "@tabler/icons";
+import { Footer, Button } from "@mantine/core";
+import { IconQuestionMark, IconBrandGithub } from "@tabler/icons";
 import { Link } from "react-router-dom";
 
 const Bottom = () => {
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   return (
     <Footer
       height={60}

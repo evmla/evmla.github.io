@@ -1,15 +1,9 @@
 import {
-  getMetadataBySlug,
+  getMetadataBySoul,
   getMetadataById,
-  getMetadataByAddress,
-  slugs,
+  getMetadataByOwner,
+  souls,
 } from "./read";
 import write from "./write";
 
-export {
-  write,
-  getMetadataBySlug,
-  getMetadataById,
-  getMetadataByAddress,
-  slugs,
-};
+export { write, getMetadataBySoul, getMetadataById, getMetadataByOwner, souls };

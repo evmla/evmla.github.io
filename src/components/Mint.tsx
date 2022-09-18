@@ -8,7 +8,6 @@ import {
 import {
   Box,
   Button,
-  Center,
   CopyButton,
   createStyles,
   Divider,
@@ -43,22 +42,24 @@ Object.keys(data.emojis).forEach((key) => {
     });
   }
 });
+
 // @ts-ignore
 import Picker from "@emoji-mart/react";
 import { useEffect, useState } from "react";
 import { Call, useCalls, useEthers } from "@usedapp/core";
-import { getMetadataByAddress, getMetadataBySlug, write } from "../queries";
+import { getMetadataByOwner, getMetadataBySoul, write } from "../queries";
 import { ethers } from "ethers";
-import { Slug } from "../interfaces";
+import { Soul } from "../interfaces";
 import { Dot } from "./Dot";
 import Connect from "./Connect";
 import { EvmosTestChain } from "../utils/chains";
+import { Link } from "react-router-dom";
 
-const Register = () => {
+const Mint = () => {
   const theme = useMantineTheme();
   const { account, chainId } = useEthers();
 
-  const [owner, setOwner] = useState<Slug | undefined>();
+  const [owner, setOwner] = useState<Soul | undefined>();
   const [title, setTitle] = useState("");
   const [emoji, setEmoji] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
@@ -71,12 +72,12 @@ const Register = () => {
   const [query, setQuery] = useState<Call[]>([]);
   const slugRaw: any = useCalls(query) ?? [];
 
-  const { send: _register, state: _stateRegister } = write("create");
+  const { send: _register, state: _stateRegister } = write("mint");
 
   useEffect(() => {
-    let q = [...getMetadataBySlug(emoji)];
+    let q = [...getMetadataBySoul(emoji)];
     if (account) {
-      q = [...q, ...getMetadataByAddress(account)];
+      q = [...q, ...getMetadataByOwner(account)];
     }
     setLoading(true);
     setStatus("Loading ...");
@@ -107,13 +108,13 @@ const Register = () => {
       setLoading(false);
       setExists(true);
     }
-    const [owner, slug, name, description, image, link] = slugRaw?.[1]
+    const [owner, soul, name, description, image, link] = slugRaw?.[1]
       ?.value?.[0] ?? [null, null, null, null, null, null];
     if (owner === ethers.constants.AddressZero) {
       setOwner(undefined);
     } else if (owner) {
-      setEmoji(slug);
-      setOwner({ owner, slug, name, description, image, link });
+      setEmoji(soul);
+      setOwner({ owner, soul, name, description, image, link });
     }
   }, [slugRaw]);
 
@@ -158,7 +159,7 @@ const Register = () => {
   const handleRegister = async () => {
     if (!emoji || !title) return;
     setLoading(true);
-    setStatus("Registering ...");
+    setStatus("Minting ...");
     try {
       let utf8Encode = new TextEncoder();
       const price = 16 - utf8Encode.encode(emoji).length;
@@ -210,7 +211,7 @@ const Register = () => {
         transitionTimingFunction="ease"
         opened={opened}
         onClose={() => setOpened(false)}
-        title="Register"
+        title="Mint"
         padding="xl"
         size="xl"
       />
@@ -285,7 +286,7 @@ const Register = () => {
               uppercase
               onClick={() => handleRegister()}
             >
-              Register
+              Mint
             </Button>
           ) : !account ? (
             <Connect />
@@ -426,7 +427,7 @@ const Register = () => {
                     style={{ opacity: "0.5" }}
                   />
                   <Text style={{ lineHeight: "1.3", position: "relative" }}>
-                    {owner.slug}
+                    {owner.soul}
                   </Text>
                 </Box>
               </Box>
@@ -514,10 +515,9 @@ const Register = () => {
                     >
                       Your personal Soulbound {emoji || "👻"} Token{" "}
                       <Button
-                        component="a"
-                        target="_blank"
+                        component={Link}
                         variant="subtle"
-                        href="https://vitalik.eth.limo/general/2022/01/26/soulbound.html"
+                        to="/faq"
                         compact
                       >
                         What is SBT?
@@ -563,4 +563,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Mint;

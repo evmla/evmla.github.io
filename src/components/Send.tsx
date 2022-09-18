@@ -1,10 +1,7 @@
-import { IconCheck, IconCopy, IconCoin, IconLock } from "@tabler/icons";
+import { IconCoin, IconLock } from "@tabler/icons";
 import {
-  ActionIcon,
-  Badge,
   Box,
   Button,
-  Center,
   CopyButton,
   Grid,
   Group,
@@ -14,7 +11,6 @@ import {
   NumberInputHandlers,
   Paper,
   Text,
-  Tooltip,
   useMantineTheme,
 } from "@mantine/core";
 import data from "@emoji-mart/data";
@@ -45,11 +41,11 @@ import {
   useSendTransaction,
 } from "@usedapp/core";
 import { useEffect, useRef, useState } from "react";
-import { getMetadataBySlug, getMetadataByAddress } from "../queries";
+import { getMetadataBySoul, getMetadataByOwner } from "../queries";
 import Connect from "./Connect";
 import { ethers } from "ethers";
 import { useParams } from "react-router-dom";
-import { Slug } from "../interfaces";
+import { Soul } from "../interfaces";
 
 const Send = () => {
   const theme = useMantineTheme();
@@ -71,8 +67,8 @@ const Send = () => {
   const [senderLoading, setSenderLoading] = useState(false);
   const [recipientLoading, setRecipientLoading] = useState(false);
 
-  const [sender, setSender] = useState<Slug | undefined>();
-  const [recipient, setRecipient] = useState<Slug | undefined>();
+  const [sender, setSender] = useState<Soul | undefined>();
+  const [recipient, setRecipient] = useState<Soul | undefined>();
 
   const [senderQuery, setSenderQuery] = useState<Call[]>([]);
   const [recipientQuery, setRecipientQuery] = useState<Call[]>([]);
@@ -94,7 +90,7 @@ const Send = () => {
     if (account) {
       setSenderLoading(true);
       setTimeout(() => {
-        setSenderQuery(getMetadataByAddress(account));
+        setSenderQuery(getMetadataByOwner(account));
       }, 1000);
     }
   }, [account]);
@@ -103,25 +99,25 @@ const Send = () => {
     if (emoji) {
       setRecipientLoading(true);
       setTimeout(() => {
-        setRecipientQuery(getMetadataBySlug(emoji));
+        setRecipientQuery(getMetadataBySoul(emoji));
       }, 1000);
     }
   }, [emoji]);
 
   useEffect(() => {
-    const [owner, slug, name, description, image, link] = senderRaw?.[0]
+    const [owner, soul, name, description, image, link] = senderRaw?.[0]
       ?.value?.[0] ?? [null, null, null, null, null, null];
     if (owner === ethers.constants.AddressZero) {
       setSenderLoading(false);
       setSender(undefined);
     } else if (owner) {
       setSenderLoading(false);
-      setSender({ owner, slug, name, description, image, link });
+      setSender({ owner, soul, name, description, image, link });
     }
   }, [senderRaw]);
 
   useEffect(() => {
-    const [owner, slug, name, description, image, link] = recipientRaw?.[0]
+    const [owner, soul, name, description, image, link] = recipientRaw?.[0]
       ?.value?.[0] ?? [null, null, null, null, null, null];
     if (owner === ethers.constants.AddressZero) {
       setRecipientLoading(false);
@@ -129,7 +125,7 @@ const Send = () => {
       setRecipient(undefined);
     } else if (owner) {
       setRecipientLoading(false);
-      setRecipient({ owner, slug, name, description, image, link });
+      setRecipient({ owner, soul, name, description, image, link });
     }
   }, [recipientRaw]);
 
@@ -313,7 +309,7 @@ const Send = () => {
             {senderLoading ? (
               <Loader size="xl" color="cyan" />
             ) : (
-              <Text size={60}>{(sender && sender.slug) || "❓"}</Text>
+              <Text size={60}>{(sender && sender.soul) || "❓"}</Text>
             )}
           </Grid.Col>
           <Grid.Col span={6}>
