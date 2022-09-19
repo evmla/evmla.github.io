@@ -9,6 +9,7 @@ import {
   Group,
   ActionIcon,
   useMantineColorScheme,
+  MediaQuery,
 } from "@mantine/core";
 import {
   IconSun,
@@ -101,7 +102,9 @@ const Top = () => {
                 label: (
                   <Center>
                     <IconUserPlus size={16} />
-                    <Box ml={10}>Mint SBT</Box>
+                    <MediaQuery smallerThan="xs" styles={{ display: 'none' }}>
+                      <Box ml={10}>Mint SBT</Box>
+                    </MediaQuery>
                   </Center>
                 ),
               },
@@ -110,7 +113,9 @@ const Top = () => {
                 label: (
                   <Center>
                     <IconExchange size={16} />
-                    <Box ml={10}>Send EVMOS</Box>
+                    <MediaQuery smallerThan="xs" styles={{ display: 'none' }}>
+                      <Box ml={10}>Send EVMOS</Box>
+                    </MediaQuery>
                   </Center>
                 ),
               },

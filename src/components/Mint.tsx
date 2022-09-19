@@ -22,6 +22,7 @@ import {
   ThemeIcon,
   Title,
   useMantineTheme,
+  MediaQuery,
 } from "@mantine/core";
 
 import data from "@emoji-mart/data";

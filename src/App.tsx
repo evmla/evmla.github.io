@@ -97,7 +97,6 @@ function App() {
           <Grid>
             <Grid.Col span="auto"></Grid.Col>
             <Grid.Col
-              span={6}
               style={{
                 marginTop: 100,
                 zIndex: 1,
