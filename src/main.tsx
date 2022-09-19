@@ -2,18 +2,18 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Config, DAppProvider, DEFAULT_SUPPORTED_CHAINS } from "@usedapp/core";
 import { HashRouter } from "react-router-dom";
-import { EvmosTestChain } from "./utils/chains";
+import { EvmosChain } from "./utils/chains";
 
 import "@fontsource/righteous";
 
 import App from "./App";
 
 const config: Config = {
-  readOnlyChainId: EvmosTestChain.chainId,
+  readOnlyChainId: EvmosChain.chainId,
   readOnlyUrls: {
-    [EvmosTestChain.chainId]: EvmosTestChain.rpcUrl || "",
+    [EvmosChain.chainId]: EvmosChain.rpcUrl || "",
   },
-  networks: [...DEFAULT_SUPPORTED_CHAINS, EvmosTestChain],
+  networks: [...DEFAULT_SUPPORTED_CHAINS, EvmosChain],
   noMetamaskDeactivate: true,
 };
 

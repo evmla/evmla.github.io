@@ -5,7 +5,7 @@ export const EvmosChain: Chain = {
   chainName: "Evmos",
   isTestChain: false,
   isLocalChain: false,
-  multicallAddress: "0x72FD80767E43F0317e5b6E132eAfAeD92ea6a68d",
+  multicallAddress: "0x0066ee643f939C543C571d3c74bc03df421e14BD",
   getExplorerAddressLink: (address: string) =>
     `https://evm.evmos.org/#/address/${address}`,
   getExplorerTransactionLink: (transactionHash: string) =>
