@@ -53,7 +53,7 @@ import { ethers } from "ethers";
 import { Soul } from "../interfaces";
 import { Dot } from "./Dot";
 import Connect from "./Connect";
-import { EvmosTestChain } from "../utils/chains";
+import { EvmosChain } from "../utils/chains";
 import { Link } from "react-router-dom";
 
 const Mint = () => {
@@ -82,13 +82,13 @@ const Mint = () => {
     }
     setLoading(true);
     setStatus("Loading ...");
-    if (account && chainId === EvmosTestChain.chainId) {
+    if (account && chainId === EvmosChain.chainId) {
       setQuery(q);
     } else {
       if (!account) {
         setLoading(false);
         // setStatus("Please, CONNECT!");
-      } else if (chainId !== EvmosTestChain.chainId) {
+      } else if (chainId !== EvmosChain.chainId) {
         setStatus("Please, SWITCH NETWORK!");
       }
     }
