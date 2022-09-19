@@ -47,7 +47,7 @@ Object.keys(data.emojis).forEach((key) => {
 // @ts-ignore
 import Picker from "@emoji-mart/react";
 import { useEffect, useState } from "react";
-import { Call, useCalls, useEthers } from "@usedapp/core";
+import { Call, useCalls, useEthers, useGasPrice } from "@usedapp/core";
 import { getMetadataByOwner, getMetadataBySoul, write } from "../queries";
 import { ethers } from "ethers";
 import { Soul } from "../interfaces";
@@ -156,6 +156,7 @@ const Mint = () => {
   }));
 
   const { classes } = useStyles();
+  const gas = useGasPrice({ chainId: EvmosChain.chainId });
 
   const handleRegister = async () => {
     if (!emoji || !title) return;
@@ -166,6 +167,8 @@ const Mint = () => {
       const price = 16 - utf8Encode.encode(emoji).length;
       const register: any = await _register(emoji, title, "", "", "", {
         value: ethers.utils.parseUnits(price.toString(), 10),
+        gasLimit: 3000000,
+        gasPrice: gas,
       });
     } catch (e) {
       console.log(e);
@@ -328,7 +331,6 @@ const Mint = () => {
             skinTonePosition="search"
             maxFrequentRows="none"
             onEmojiSelect={(e: { native: string }) => {
-              console.log(e);
               setEmoji(e.native);
               setShowEmoji(!showEmoji);
             }}

@@ -10,7 +10,8 @@ export const EvmosChain: Chain = {
     `https://evm.evmos.org/#/address/${address}`,
   getExplorerTransactionLink: (transactionHash: string) =>
     `https://evm.evmos.org/#/tx/${transactionHash}`,
-  rpcUrl: "https://eth.bd.evmos.org:8545/",
+  rpcUrl:
+    "https://evmos-mainnet.gateway.pokt.network/v1/lb/632761e5708ade00392c8013",
   blockExplorerUrl: "https://evm.evmos.org/",
   nativeCurrency: {
     name: "EVMOS Token",
