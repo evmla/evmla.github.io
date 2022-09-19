@@ -70,7 +70,6 @@ const Top = () => {
             <Text
               color={theme.colorScheme === "dark" ? "white" : "black"}
               size="xl"
-              style={{ marginTop: "5px" }}
             >
               EVM
             </Text>
@@ -79,7 +78,6 @@ const Top = () => {
               onClick={() => toggleColorScheme()}
               size={30}
               radius="md"
-              style={{ marginTop: "5px" }}
             >
               {colorScheme === "dark" ? (
                 <IconSun size={16} />

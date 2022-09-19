@@ -1,4 +1,4 @@
-import { Footer, Button, Group } from "@mantine/core";
+import { Footer, Button, Group, MediaQuery } from "@mantine/core";
 import {
   IconQuestionMark,
   IconBrandGithub,
@@ -23,14 +23,16 @@ const Bottom = () => {
         }}
       >
         <Group>
-          <Button
-            variant="light"
-            color="gray"
-            compact
-            leftIcon={<IconGhost size={14} />}
-          >
-            2022
-          </Button>
+          <MediaQuery smallerThan="xs" styles={{ display: 'none' }}>
+            <Button
+              variant="light"
+              color="gray"
+              compact
+              leftIcon={<IconGhost size={14} />}
+            >
+              2022
+            </Button>
+          </MediaQuery>
           <Button
             variant="light"
             color="cyan"
@@ -43,17 +45,19 @@ const Bottom = () => {
           </Button>
         </Group>
         <Group>
-          <Button
-            variant="light"
-            color="orange"
-            compact
-            leftIcon={<IconPackage size={14} />}
-            component="a"
-            href="https://www.npmjs.com/package/@soulbound/contracts"
-            target="_blank"
-          >
-            NPM
-          </Button>
+          <MediaQuery smallerThan="xs" styles={{ display: 'none' }}>
+            <Button
+              variant="light"
+              color="orange"
+              compact
+              leftIcon={<IconPackage size={14} />}
+              component="a"
+              href="https://www.npmjs.com/package/@soulbound/contracts"
+              target="_blank"
+            >
+              NPM
+            </Button>
+          </MediaQuery>
           <Button
             variant="light"
             color="violet"
