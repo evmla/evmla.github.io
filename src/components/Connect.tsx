@@ -22,7 +22,7 @@ const Connect = () => {
       {account && chainId !== EvmosChain.chainId && (
         <Button
           onClick={() => {
-            switchNetwork(9000);
+            switchNetwork(EvmosChain.chainId);
           }}
           radius="md"
           variant="light"
