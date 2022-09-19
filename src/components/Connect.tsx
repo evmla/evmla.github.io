@@ -1,6 +1,6 @@
 import { Button, Group } from "@mantine/core";
 import { useEthers } from "@usedapp/core";
-import { EvmosTestChain } from "../utils/chains";
+import { EvmosChain } from "../utils/chains";
 
 const Connect = () => {
   const { activateBrowserWallet, switchNetwork, account, chainId } =
@@ -19,7 +19,7 @@ const Connect = () => {
           Connect
         </Button>
       )}
-      {account && chainId !== EvmosTestChain.chainId && (
+      {account && chainId !== EvmosChain.chainId && (
         <Button
           onClick={() => {
             switchNetwork(9000);
@@ -33,7 +33,7 @@ const Connect = () => {
           Network
         </Button>
       )}
-      {account && chainId === EvmosTestChain.chainId && (
+      {account && chainId === EvmosChain.chainId && (
         <Button variant="subtle" color="teal" uppercase fullWidth>
           {account.slice(0, 4)}..{account.slice(-2)}
         </Button>

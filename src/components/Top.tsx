@@ -100,7 +100,7 @@ const Top = () => {
                 label: (
                   <Center>
                     <IconUserPlus size={16} />
-                    <MediaQuery smallerThan="xs" styles={{ display: 'none' }}>
+                    <MediaQuery smallerThan="xs" styles={{ display: "none" }}>
                       <Box ml={10}>Mint SBT</Box>
                     </MediaQuery>
                   </Center>
@@ -111,7 +111,7 @@ const Top = () => {
                 label: (
                   <Center>
                     <IconExchange size={16} />
-                    <MediaQuery smallerThan="xs" styles={{ display: 'none' }}>
+                    <MediaQuery smallerThan="xs" styles={{ display: "none" }}>
                       <Box ml={10}>Send EVMOS</Box>
                     </MediaQuery>
                   </Center>
