@@ -116,7 +116,7 @@ export default function Index() {
               >
                 Vitalik Buterin
               </Button>
-              , Soulbound 👻 tokens are non-transferable, non-funded tokens for
+              , Soulbound 👻 Tokens are non-transferable, non-funded tokens for
               a decentralized society.
             </Accordion.Panel>
           </Accordion.Item>
@@ -126,17 +126,17 @@ export default function Index() {
               How to mint a second Soulbound 👻 token?
             </Accordion.Control>
             <Accordion.Panel>
-              One address can only have one Soulbound token. If you want to
-              issue a second Soulbound token, you need to change the address.
+              One address can only have one Soulbound 👻 Token. If you want to
+              issue a second Soulbound 👻 Token, you need to change the address.
             </Accordion.Panel>
           </Accordion.Item>
 
           <Accordion.Item value="Total">
             <Accordion.Control>
-              How many Soulbound 👻 tokens will be minted in total?
+              How many Soulbound 👻 Tokens will be minted in total?
             </Accordion.Control>
             <Accordion.Panel>
-              About 1411 Soulbound 👻 tokens consisting of one emoji will be
+              About 1411 Soulbound 👻 Tokens consisting of one emoji will be
               minted. New emoji appear every year, so the total number will be
               increased.
             </Accordion.Panel>

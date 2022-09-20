@@ -270,7 +270,6 @@ const Send = () => {
             skinTonePosition="search"
             maxFrequentRows="0"
             onEmojiSelect={(e: { native: string }) => {
-              console.log(e);
               setEmoji(e.native);
               setShowEmoji(!showEmoji);
             }}

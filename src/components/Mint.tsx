@@ -96,10 +96,14 @@ const Mint = () => {
   }, [emoji, account, chainId]);
 
   useEffect(() => {
-    if (_stateRegister.status != "None" && _stateRegister.status != "Success") {
+    if (
+      _stateRegister.status === "PendingSignature" ||
+      _stateRegister.status === "Mining"
+    ) {
+      return;
+    } else {
       setLoading(false);
       setStatus("");
-      return;
     }
     const slugExists = slugRaw?.[0]?.value?.[0]?.[0] ?? "";
     if (slugExists === ethers.constants.AddressZero) {
@@ -178,6 +182,7 @@ const Mint = () => {
   };
 
   useEffect(() => {
+    console.log("_stateRegister", _stateRegister);
     if (
       _stateRegister.status === "Success" ||
       _stateRegister.status === "Exception"
