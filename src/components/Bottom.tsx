@@ -23,14 +23,14 @@ const Bottom = () => {
         }}
       >
         <Group>
-          <MediaQuery smallerThan="xs" styles={{ display: 'none' }}>
+          <MediaQuery smallerThan="xs" styles={{ display: "none" }}>
             <Button
               variant="light"
               color="gray"
               compact
               leftIcon={<IconGhost size={14} />}
             >
-              2022
+              BETA v0.1.5
             </Button>
           </MediaQuery>
           <Button
@@ -45,7 +45,7 @@ const Bottom = () => {
           </Button>
         </Group>
         <Group>
-          <MediaQuery smallerThan="xs" styles={{ display: 'none' }}>
+          <MediaQuery smallerThan="xs" styles={{ display: "none" }}>
             <Button
               variant="light"
               color="orange"
