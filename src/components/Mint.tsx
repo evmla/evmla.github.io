@@ -182,7 +182,6 @@ const Mint = () => {
   };
 
   useEffect(() => {
-    console.log("_stateRegister", _stateRegister);
     if (
       _stateRegister.status === "Success" ||
       _stateRegister.status === "Exception"
