@@ -53,7 +53,7 @@ import { ethers } from "ethers";
 import { Soul } from "../interfaces";
 import { Dot } from "./Dot";
 import Connect from "./Connect";
-import { TestChain } from "../utils/chains";
+import TestChain from "../utils/chains";
 import { Link } from "react-router-dom";
 
 const Mint = () => {
