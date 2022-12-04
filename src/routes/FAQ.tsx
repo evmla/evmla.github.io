@@ -103,40 +103,31 @@ export default function Index() {
           className={classes.root}
         >
           <Accordion.Item value="Soulbound">
-            <Accordion.Control>What is Soulbound 👻 Token?</Accordion.Control>
+            <Accordion.Control>
+              What is EVMOS Emoji 👻 Wallet?
+            </Accordion.Control>
             <Accordion.Panel>
-              Proposed by Ethereum creator{" "}
-              <Button
-                component="a"
-                target="_blank"
-                compact
-                variant="subtle"
-                color="indigo"
-                href="https://vitalik.eth.limo/general/2022/01/26/soulbound.html"
-              >
-                Vitalik Buterin
-              </Button>
-              , Soulbound 👻 Tokens are non-transferable, non-funded tokens for
-              a decentralized society.
+              This is a short and memorable address of your wallet, in the form
+              of an emoji.
             </Accordion.Panel>
           </Accordion.Item>
 
           <Accordion.Item value="Mint">
             <Accordion.Control>
-              How to mint a second Soulbound 👻 token?
+              How can I sell my Emoji 👻 Wallet?
             </Accordion.Control>
             <Accordion.Panel>
-              One address can only have one Soulbound 👻 Token. If you want to
-              issue a second Soulbound 👻 Token, you need to change the address.
+              Each Emoji 👻 Wallet is a non-fungible token. You can sell and buy
+              it on any marketplace, for example tofunft.com.
             </Accordion.Panel>
           </Accordion.Item>
 
           <Accordion.Item value="Total">
             <Accordion.Control>
-              How many Soulbound 👻 Tokens will be minted in total?
+              How many Emoji 👻 Wallets will be minted in total?
             </Accordion.Control>
             <Accordion.Panel>
-              About 1411 Soulbound 👻 Tokens consisting of one emoji will be
+              About 1411 Emoji 👻 Wallets consisting of one emoji will be
               minted. New emoji appear every year, so the total number will be
               increased.
             </Accordion.Panel>

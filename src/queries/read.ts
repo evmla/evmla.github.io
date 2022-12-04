@@ -1,9 +1,9 @@
 import { Contract, utils } from "ethers";
 import { EVM_CONTRACT } from "../constants";
-import { SBT } from "../abi";
+import { EMJ } from "../abi";
 import { Call } from "@usedapp/core";
 
-const contract = new Contract(EVM_CONTRACT, new utils.Interface(SBT));
+const contract = new Contract(EVM_CONTRACT, new utils.Interface(EMJ));
 
 const souls = (first: number = 1, skip: number = 0): Call[] => {
   const calls = [];
@@ -56,4 +56,35 @@ const getMetadataById = (id: string): Call[] => {
   return calls;
 };
 
-export { getMetadataBySoul, getMetadataById, getMetadataByOwner, souls };
+const tokenByEmoji = (emoji: string): Call[] => {
+  const calls = [];
+
+  calls.push({
+    contract,
+    method: "tokenByEmoji",
+    args: [emoji],
+  });
+
+  return calls;
+};
+
+const tokenByOwner = (owner: string): Call[] => {
+  const calls = [];
+
+  calls.push({
+    contract,
+    method: "tokenByOwner",
+    args: [owner],
+  });
+
+  return calls;
+};
+
+export {
+  getMetadataBySoul,
+  getMetadataById,
+  getMetadataByOwner,
+  souls,
+  tokenByEmoji,
+  tokenByOwner,
+};

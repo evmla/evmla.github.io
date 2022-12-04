@@ -6,3 +6,9 @@ export interface Soul {
   image: string;
   link: string;
 }
+
+export interface Emoji {
+  owner: string;
+  emoji: string;
+  name: string;
+}

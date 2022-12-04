@@ -101,7 +101,7 @@ const Top = () => {
                   <Center>
                     <IconUserPlus size={16} />
                     <MediaQuery smallerThan="xs" styles={{ display: "none" }}>
-                      <Box ml={10}>Mint SBT</Box>
+                      <Box ml={10}>Mint EMJ</Box>
                     </MediaQuery>
                   </Center>
                 ),

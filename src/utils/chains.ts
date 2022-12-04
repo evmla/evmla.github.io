@@ -1,17 +1,16 @@
 import { Chain } from "@usedapp/core";
 
-export const EvmosChain: Chain = {
+const EvmosChain: Chain = {
   chainId: 9001,
   chainName: "Evmos",
   isTestChain: false,
   isLocalChain: false,
-  multicallAddress: "0x0066ee643f939C543C571d3c74bc03df421e14BD",
+  multicallAddress: "0x409d89416C593E7f275Dc2B6c95Bd30B2e55E771",
   getExplorerAddressLink: (address: string) =>
     `https://evm.evmos.org/#/address/${address}`,
   getExplorerTransactionLink: (transactionHash: string) =>
     `https://evm.evmos.org/#/tx/${transactionHash}`,
-  rpcUrl:
-    "https://evmos-mainnet.gateway.pokt.network/v1/lb/632761e5708ade00392c8013",
+  rpcUrl: "https://eth.bd.evmos.org:8545",
   blockExplorerUrl: "https://evm.evmos.org/",
   nativeCurrency: {
     name: "EVMOS Token",
@@ -20,7 +19,7 @@ export const EvmosChain: Chain = {
   },
 };
 
-export const EvmosTestChain: Chain = {
+const EvmosTestChain: Chain = {
   chainId: 9000,
   chainName: "Evmos Testnet",
   isTestChain: true,
@@ -38,3 +37,22 @@ export const EvmosTestChain: Chain = {
     decimals: 18,
   },
 };
+
+const TestChain: Chain = {
+  chainId: 31337,
+  chainName: "Testnet",
+  isTestChain: true,
+  isLocalChain: false,
+  multicallAddress: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+  getExplorerAddressLink: (address: string) => ``,
+  getExplorerTransactionLink: (transactionHash: string) => ``,
+  rpcUrl: "http://localhost:8545/",
+  blockExplorerUrl: "",
+  nativeCurrency: {
+    name: "Token",
+    symbol: "TST",
+    decimals: 18,
+  },
+};
+
+export default EvmosChain;

@@ -4,6 +4,11 @@ import {
   IconLink,
   IconCurrencyDollar,
   IconGhost,
+  IconX,
+  IconSearch,
+  IconBuildingStore,
+  IconWallet,
+  IconUserCheck,
 } from "@tabler/icons";
 import {
   Box,
@@ -23,7 +28,9 @@ import {
   Title,
   useMantineTheme,
   MediaQuery,
+  Notification,
 } from "@mantine/core";
+import { Flex } from "@mantine/core";
 
 import data from "@emoji-mart/data";
 Object.keys(data.emojis).forEach((key) => {
@@ -47,20 +54,31 @@ Object.keys(data.emojis).forEach((key) => {
 // @ts-ignore
 import Picker from "@emoji-mart/react";
 import { useEffect, useState } from "react";
-import { Call, useCalls, useEthers, useGasPrice } from "@usedapp/core";
-import { getMetadataByOwner, getMetadataBySoul, write } from "../queries";
+import {
+  Call,
+  useCalls,
+  useEtherBalance,
+  useEthers,
+  useGasPrice,
+} from "@usedapp/core";
+import {
+  tokenByOwner as getMetadataByOwner,
+  tokenByEmoji as getMetadataBySoul,
+  write,
+} from "../queries";
 import { ethers } from "ethers";
-import { Soul } from "../interfaces";
+import { Emoji } from "../interfaces";
 import { Dot } from "./Dot";
 import Connect from "./Connect";
-import { TestChain } from "../utils/chains";
+import DefaultChain from "../utils/chains";
 import { Link } from "react-router-dom";
 
 const Mint = () => {
   const theme = useMantineTheme();
   const { account, chainId } = useEthers();
+  const etherBalance = useEtherBalance(account);
 
-  const [owner, setOwner] = useState<Soul | undefined>();
+  const [owner, setOwner] = useState<Emoji | undefined>();
   const [title, setTitle] = useState("");
   const [emoji, setEmoji] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
@@ -73,22 +91,26 @@ const Mint = () => {
   const [query, setQuery] = useState<Call[]>([]);
   const slugRaw: any = useCalls(query) ?? [];
 
+  console.log("slugRaw", slugRaw);
+
   const { send: _register, state: _stateRegister } = write("mint");
 
   useEffect(() => {
+    console.log("emoji", emoji);
     let q = [...getMetadataBySoul(emoji)];
     if (account) {
+      console.log("account", account);
       q = [...q, ...getMetadataByOwner(account)];
     }
     setLoading(true);
     setStatus("Loading ...");
-    if (account && chainId === TestChain.chainId) {
+    if (account && chainId === DefaultChain.chainId) {
       setQuery(q);
     } else {
       if (!account) {
         setLoading(false);
         // setStatus("Please, CONNECT!");
-      } else if (chainId !== TestChain.chainId) {
+      } else if (chainId !== DefaultChain.chainId) {
         setStatus("Please, SWITCH NETWORK!");
       }
     }
@@ -106,6 +128,7 @@ const Mint = () => {
       setStatus("");
     }
     const slugExists = slugRaw?.[0]?.value?.[0]?.[0] ?? "";
+    console.log("slugExists", slugExists);
     if (slugExists === ethers.constants.AddressZero) {
       setLoading(false);
       setExists(false);
@@ -113,13 +136,13 @@ const Mint = () => {
       setLoading(false);
       setExists(true);
     }
-    const [owner, soul, name, description, image, link] = slugRaw?.[1]
-      ?.value?.[0] ?? [null, null, null, null, null, null];
+    const [owner, emoji, name] = slugRaw?.[1]?.value?.[0] ?? [null, null, null];
+    console.log("owner, emoji, name", owner, emoji, name);
     if (owner === ethers.constants.AddressZero) {
       setOwner(undefined);
     } else if (owner) {
-      setEmoji(soul);
-      setOwner({ owner, soul, name, description, image, link });
+      setEmoji(emoji);
+      setOwner({ owner, emoji, name });
     }
   }, [slugRaw]);
 
@@ -160,7 +183,7 @@ const Mint = () => {
   }));
 
   const { classes } = useStyles();
-  const gas = useGasPrice({ chainId: TestChain.chainId });
+  const gas = useGasPrice({ chainId: DefaultChain.chainId });
 
   const handleRegister = async () => {
     if (!emoji || !title) return;
@@ -169,7 +192,7 @@ const Mint = () => {
     try {
       let utf8Encode = new TextEncoder();
       const price = 16 - utf8Encode.encode(emoji).length;
-      const register: any = await _register(emoji, title, "", "", "", {
+      const register: any = await _register(emoji, title, {
         value: ethers.utils.parseUnits(price.toString(), 10),
         gasLimit: 3000000,
         gasPrice: gas,
@@ -352,7 +375,7 @@ const Mint = () => {
             deg: 45,
           }}
         >
-          Your EVMOS SB Token
+          EVMOS Emoji 👻 Wallet
         </Title>
         {loading ? (
           <Box
@@ -372,14 +395,17 @@ const Mint = () => {
             }}
           >
             {owner ? (
-              <Box
-                style={{
-                  textAlign: "center",
-                  width: "100%",
-                }}
+              <Flex
+                mih={50}
+                gap="lg"
+                justify="center"
+                align="center"
+                direction="row"
+                wrap="wrap"
               >
                 <Box
                   style={{
+                    textAlign: "center",
                     fontSize: 100,
                     border: "0",
                     borderRadius: "20px",
@@ -434,10 +460,65 @@ const Mint = () => {
                     style={{ opacity: "0.5" }}
                   />
                   <Text style={{ lineHeight: "1.3", position: "relative" }}>
-                    {owner.soul}
+                    {owner.emoji}
                   </Text>
                 </Box>
-              </Box>
+                <Box>
+                  <Notification
+                    icon={<IconUserCheck size={18} />}
+                    color="cyan"
+                    disallowClose
+                  >
+                    {account}
+                  </Notification>
+                  <Divider
+                    my="xs"
+                    variant="dashed"
+                    labelPosition="center"
+                    label={
+                      <>
+                        <IconWallet size={12} />
+                        <Box ml={5}>Balance</Box>
+                      </>
+                    }
+                  />
+                  <Notification
+                    icon={<IconWallet size={18} />}
+                    color="teal"
+                    disallowClose
+                  >
+                    {etherBalance && ethers.utils.formatEther(etherBalance)}{" "}
+                    <span className={classes.highlight}>EVMOS</span>
+                  </Notification>
+                  <Divider
+                    my="xs"
+                    variant="dashed"
+                    labelPosition="center"
+                    label={
+                      <>
+                        <IconBuildingStore size={12} />
+                        <Box ml={5}>Emoji Wallet NFT</Box>
+                      </>
+                    }
+                  />
+                  <Notification
+                    icon={<IconBuildingStore size={18} />}
+                    color="violet"
+                    disallowClose
+                  >
+                    <Button
+                      component="a"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variant="light"
+                      fullWidth
+                      href={`https://tofunft.com/user/${account}/items/in-wallet`}
+                    >
+                      Buy / Sell NFT
+                    </Button>
+                  </Notification>
+                </Box>
+              </Flex>
             ) : (
               <Box
                 style={{
@@ -520,14 +601,14 @@ const Mint = () => {
                         </ThemeIcon>
                       }
                     >
-                      Your personal Soulbound {emoji || "👻"} Token{" "}
+                      Your Personal Emoji {emoji || "👻"} Wallet{" "}
                       <Button
                         component={Link}
                         variant="subtle"
                         to="/faq"
                         compact
                       >
-                        What is SBT?
+                        What is Emoji NFT?
                       </Button>
                     </List.Item>
                     <List.Item
@@ -538,7 +619,7 @@ const Mint = () => {
                       }
                     >
                       Sending <span className={classes.highlight}>EVMOS</span>{" "}
-                      coins using emoji {emoji || "👻"} address
+                      Using Emoji {emoji || "👻"} Wallet
                     </List.Item>
                     <List.Item
                       icon={
@@ -547,7 +628,7 @@ const Mint = () => {
                         </ThemeIcon>
                       }
                     >
-                      Your beautiful and short payment URL{" "}
+                      Your Beautiful And Short Payment URL{" "}
                       <Button
                         component="a"
                         target="_blank"
